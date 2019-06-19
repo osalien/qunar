@@ -3,8 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Hello world</title>
+    <script src="./vue.js"></script>
 </head>
 <body>
-    <div id="app"></div>
+    <div id="app">{{content}}</div>
+
+    <script>
+        var app = new Vue({
+            el:'#app',
+            data:{
+                content:"Hello world"
+            }
+        });
+        setTimeout(function () {
+            app.$data.content = 'bye world'
+        },2000)
+    </script>
 </body>
 </html>
