@@ -2,56 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>TodoList</title>
+    <title>Vue实例生命周期函数</title>
     <script src="./vue.js"></script>
 </head>
 <body>
-    <div id="app">
-        <input type="text" v-model="inputValue" />
-        <button @click="handleBtnClick">提交</button>
-        <ul>
-            <!--<li v-for="item in list">{{item}}</li>-->
-            <todo-item :content="item"
-                       :index="index"
-                       v-for="(item,index) in list"
-                       @delete="handleItemDelete">
-            </todo-item>
-        </ul>
-    </div>
+    <div id="app">{{msg}}</div>
 
     <script>
-        /*Vue.component("TodoItem",{
-            props:['content'],
-            template:"<li>{{content}}</li>"
-        });*/
-
-        var TodoItem = {
-            props:['content','index'],
-            template:"<li @click='handleItemClick'>{{content}}</li>",
-            methods:{
-                handleItemClick: function () {
-                    this.$emit("delete", this.index)
-                }
-            }
-        };
-
-        var app = new Vue({
+        // 生命周期函数就是vue实例在某一个时间点会自动执行的函数
+        var vm = new Vue({
             el: '#app',
-            components: {
-                TodoItem:TodoItem
+            data:{
+                msg:"helloworld"
             },
-            data: {
-                list:[],
-                inputValue:''
+            beforeCreate:function () {
+                alert("111")
             },
-            methods:{
-                handleBtnClick: function () {
-                    this.list.push(this.inputValue);
-                    this.inputValue = '';
-                },
-                handleItemDelete: function (index) {
-                    this.list.splice(index,1)
-                }
+            created:function () {
+                alert("222")
+            },
+            beforeMount:function () {
+                console.log("beforeMount"+this.$el)
+            },
+            mounted:function () {
+                console.log("mounted"+this.$el)
+            },
+            beforeUpdate:function () {
+                console.log("beforeUpdate"+this.$data.msg)
+            },
+            updated:function () {
+                this.$data.msg='hello msg';
+                console.log("updated"+this.$data.msg)
             }
         });
     </script>
