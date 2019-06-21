@@ -12,25 +12,35 @@
 </head>
 <body>
     <div id="app">
-        <template v-for="(item,key,index) of list"
-             >
-            <div>
-                {{index}}----{{key}}----{{item}}
-            </div>
-            <span>
-                {{item}}
-            </span>
-        </template>
+        <counter ref="num1" @change="handleChange"></counter>
+        <counter ref="num2" @change="handleChange"></counter>
+        <div>{{total}}</div>
     </div>
 
     <script>
-        // 生命周期函数就是vue实例在某一个时间点会自动执行的函数
+        Vue.component('counter',{
+           data:function () {
+               return {
+                   number:0
+               }
+           },
+           template:"<div @click='handleClick'>{{number}}</div>",
+            methods:{
+                handleClick:function () {
+                    this.number++;
+                    this.$emit('change')
+                }
+            }
+        });
         var vm = new Vue({
             el: '#app',
             data:{
-                list:{
-                    id:"1234",
-                    title:"nihao"
+                total:0
+            },
+            methods:{
+                handleChange:function () {
+                    console.log(this.$refs.num1.number + this.$refs.num2.number);
+                    this.total++;
                 }
             }
         });
