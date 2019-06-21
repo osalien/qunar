@@ -2,37 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Vue实例生命周期函数</title>
+    <title>Vue</title>
     <script src="./vue.js"></script>
+    <style>
+        .activated{
+            color:red
+        }
+    </style>
 </head>
 <body>
-    <div id="app">{{msg}}</div>
+    <div id="app">
+        <template v-for="(item,key,index) of list"
+             >
+            <div>
+                {{index}}----{{key}}----{{item}}
+            </div>
+            <span>
+                {{item}}
+            </span>
+        </template>
+    </div>
 
     <script>
         // 生命周期函数就是vue实例在某一个时间点会自动执行的函数
         var vm = new Vue({
             el: '#app',
             data:{
-                msg:"helloworld"
-            },
-            beforeCreate:function () {
-                alert("111")
-            },
-            created:function () {
-                alert("222")
-            },
-            beforeMount:function () {
-                console.log("beforeMount"+this.$el)
-            },
-            mounted:function () {
-                console.log("mounted"+this.$el)
-            },
-            beforeUpdate:function () {
-                console.log("beforeUpdate"+this.$data.msg)
-            },
-            updated:function () {
-                this.$data.msg='hello msg';
-                console.log("updated"+this.$data.msg)
+                list:{
+                    id:"1234",
+                    title:"nihao"
+                }
             }
         });
     </script>
