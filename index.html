@@ -12,35 +12,39 @@
 </head>
 <body>
     <div id="app">
-        <counter ref="num1" @change="handleChange"></counter>
-        <counter ref="num2" @change="handleChange"></counter>
+        <counter :count="0" @change="handleChange"></counter>
+        <counter :count="1" @change="handleChange"></counter>
         <div>{{total}}</div>
     </div>
 
     <script>
-        Vue.component('counter',{
-           data:function () {
-               return {
-                   number:0
-               }
-           },
+        var counter={
+           props:["count"],
+            data:function () {
+                return {
+                    number: this.count
+                }
+            },
            template:"<div @click='handleClick'>{{number}}</div>",
             methods:{
                 handleClick:function () {
                     this.number++;
-                    this.$emit('change')
+                    this.$emit('change',1)
                 }
             }
-        });
+        };
         var vm = new Vue({
             el: '#app',
             data:{
                 total:0
             },
+            components:{
+                counter: counter
+            },
             methods:{
-                handleChange:function () {
-                    console.log(this.$refs.num1.number + this.$refs.num2.number);
-                    this.total++;
+                handleChange:function (step) {
+                    /*console.log(this.$refs.num1.number + this.$refs.num2.number);
+                    */this.total += step;
                 }
             }
         });
