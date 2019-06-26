@@ -4,44 +4,41 @@
     <meta charset="UTF-8">
     <title>Vue</title>
     <script src="./vue.js"></script>
+    <script src="./velocity.js"></script>
+    <link rel="stylesheet" type="text/css" href="./animate.css"></link>
     <style>
-        .activated{
-            color:red
+        .fade-leave-to,.fade-enter{
+            opacity:0;
+        }
+        .fade-leave-active,.fade-enter-active{
+            transition: opacity 1s;
         }
     </style>
 </head>
 <body>
     <div id="app">
-        <child1 v-if="show==='child1'"></child1>
-        <child2 v-if="show==='child2'"></child2>
-        <button @click="handleClick">change</button>
+        <transition name="fade" mode="out-in">
+            <component :is="show"></component>
+        </transition>
+
+        <button @click="handleClick">button</button>
     </div>
 
     <script>
-        var child1={
-            data:function () {
-                return {
-                    list:[1,2,3,4]
-                }
-            },
-            template:"<div v-once>2</div>"
+        var child1 = {
+            template:"<div>hello world</div>"
         };
-        var child2={
-            data:function () {
-                return {
-                    list:[1,2,3,4]
-                }
-            },
-            template:"<div v-once>1</div>"
+        var child2 = {
+            template:"<div>Bye world</div>"
         };
         var vm = new Vue({
             el: '#app',
-            components:{
-                child1: child1,
-                child2: child2
-            },
             data:{
-                show:'child1'
+               show:"child1"
+            },
+            components:{
+                child1:child1,
+                child2:child2
             },
             methods:{
                 handleClick:function () {
