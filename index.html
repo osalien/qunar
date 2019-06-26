@@ -12,27 +12,22 @@
 </head>
 <body>
     <div id="app">
-        <child :content="'1'"></child>
+        <child @click.native='handleClick'></child>
     </div>
 
     <script>
         var child={
-            props:{
-                content : {
-                    type: String,
-                    validator:function (value) {
-                        return (value.length>5)
-                    }
-                    /*required:false,
-                    default:'default value'*/
-                }
-            },
-            template:"<div>{{content}}</div>"
+            template:"<div>hello world</div>"
         };
         var vm = new Vue({
             el: '#app',
             components:{
                 child: child
+            },
+            methods:{
+                handleClick:function () {
+                    alert("111")
+                }
             }
         });
     </script>
