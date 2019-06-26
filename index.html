@@ -12,21 +12,40 @@
 </head>
 <body>
     <div id="app">
-        <child @click.native='handleClick'></child>
+        <child1 v-if="show==='child1'"></child1>
+        <child2 v-if="show==='child2'"></child2>
+        <button @click="handleClick">change</button>
     </div>
 
     <script>
-        var child={
-            template:"<div>hello world</div>"
+        var child1={
+            data:function () {
+                return {
+                    list:[1,2,3,4]
+                }
+            },
+            template:"<div v-once>2</div>"
+        };
+        var child2={
+            data:function () {
+                return {
+                    list:[1,2,3,4]
+                }
+            },
+            template:"<div v-once>1</div>"
         };
         var vm = new Vue({
             el: '#app',
             components:{
-                child: child
+                child1: child1,
+                child2: child2
+            },
+            data:{
+                show:'child1'
             },
             methods:{
                 handleClick:function () {
-                    alert("111")
+                    this.show = this.show==="child1"?"child2":"child1";
                 }
             }
         });
