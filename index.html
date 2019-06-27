@@ -17,32 +17,34 @@
 </head>
 <body>
     <div id="app">
-        <transition name="fade" mode="out-in">
-            <component :is="show"></component>
-        </transition>
-
-        <button @click="handleClick">button</button>
+        <transition-group name="fade">
+            <div v-for="(item,index) of list" :key="item.id">{{item.title}}</div>
+        </transition-group>
+        <button @click="handleClick">add</button>
+        <button @click="handleDelete">delete</button>
     </div>
 
     <script>
-        var child1 = {
-            template:"<div>hello world</div>"
-        };
-        var child2 = {
-            template:"<div>Bye world</div>"
-        };
+        var fade = {
+            template:"<transition-group name=\"fade\">\n" +
+            "            <div v-for=\"(item,index) of list\" :key=\"item.id\">{{item.title}}</div>\n" +
+            "        </transition-group>"
+        }
+        var count = 0;
         var vm = new Vue({
             el: '#app',
             data:{
-               show:"child1"
-            },
-            components:{
-                child1:child1,
-                child2:child2
+                list:[]
             },
             methods:{
                 handleClick:function () {
-                    this.show = this.show==="child1"?"child2":"child1";
+                    this.list.push({
+                        id:count++,
+                        title:"helloworld"
+                    })
+                },
+                handleDelete:function () {
+                    this.list.pop();
                 }
             }
         });
