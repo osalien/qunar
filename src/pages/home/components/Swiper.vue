@@ -22,7 +22,7 @@ export default {
         id: '001',
         imgUrl: 'http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20196/c8de32c5ae7eea6b0d5e16aabff56266.jpg_750x200_4249f421.jpg'
       }, {
-        id: '002',
+        id: '003',
         imgUrl: 'http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20196/3a3066c073a492c1a881607181ac84ab.jpg_750x200_ca7fff4c.jpg'
       }]
     }
