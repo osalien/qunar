@@ -64,6 +64,12 @@ export default {
   },
   mounted () {
     this.scroll = new BScroll(this.$refs.wrapper)
+  },
+  activated () {
+    window.addEventListener('scroll', this.scroll)
+  },
+  deactivated () {
+    window.removeEventListener('scroll', this.scroll)
   }
 }
 </script>
