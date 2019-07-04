@@ -33,10 +33,10 @@ export default {
   },
   methods: {
     handleBannerClick () {
-      this.CommonGallary = true
+      this.showGallary = true
     },
     handleGallaryClose () {
-      this.CommonGallary = false
+      this.showGallary = false
     }
   }
 }
